@@ -1,0 +1,3 @@
+var tempoTimer = 3000;
+var timerOn = false;
+var modoFuncionamento = "";

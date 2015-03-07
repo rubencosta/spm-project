@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html><!--HTML5 doctype-->
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Pragma" content="no-cache">
+<script type="text/javascript" charset="utf-8" src="intelxdk.js"></script>
+<script type="text/javascript" language="javascript">
+    // This event handler is fired once the intel libraries are ready
+    function onDeviceReady() {
+        //hide splash screen now that our app is ready to run
+        intel.xdk.device.hideSplashScreen();
+        setTimeout(function () {
+            $.ui.launch();
+        }, 50);
+    }
+    //initial event handler to detect when intel is ready to roll
+    document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+</script>
+<script src="js/appframework.ui.min.js"></script>
+<script src="af-accordion/af.accordion.js"></script>
+<script>
+    $.ui.autoLaunch = false;
+    $.ui.useOSThemes = true; //Change this to false to force a device theme
+    $.ui.blockPageScroll();
+    $(document).ready(function () {
+        if ($.ui.useOSThemes && !$.os.ios && $("#afui").get(0).className !== "ios")
+            $("#afui").removeClass("ios");
+    });
+</script>
+<script src="data/data.json"></script>
+<script src="data/config.json"></script>
+<script src="js/js.js"></script>
+<link href="css/icons.css" rel="stylesheet" type="text/css">
+<link href="css/af.ui.css" rel="stylesheet" type="text/css">
+<link href="af-accordion/af.accordion.css" rel="stylesheet" type="text/css">
+<link href="css/mycss.css" rel="stylesheet" type="text/css">
+</head>
+
+<div id="afui" class="ios">
+    <div id="header"></div>
+    
+    
+    <div id="content" style="" class="">
+        <div class="panel" title="Main" data-header="header_0"data-nav="nav_0" id="main" selected="selected"
+        style="overflow:hidden" data-footer="footer_1"  >
+        
+             <div id="menuprincipal">
+           <ul class="accordion"  >
+               <li class="has-sub"><a>Modo Sugestivo</a>
+                   <div>
+                       O modo sugestivo é o mais simples de todos. Neste modo é apresentado imagens juntamente com notificações de todas as categorias, notificações relacionadas com o lazer, o trabalho, saúde e prática de desporto.
+                       <a class="button botaoEntrar" onclick='iniciaModo1();' id="modo1Button" data-transition="up">Entrar
+                           </a>
+                   </div>
+               </li>
+               <li class="has-sub"><a>Modo Normal</a>
+                   <div>
+                       No Modo Normal, o utilizador já consegue filtrar as notificações por categorias, ou seja, neste modo o utilizador escolhe uma categoria e a aplicação apenas dá notificações relacionadas com essa categoria.
+                       <a class="button botaoEntrar" href="#modo2" id="modo2Button" data-transition="fade">Entrar</a>
+                   </div>
+               </li>
+               <li class="has-sub"> <a>Modo Intrusivo</a>
+                   <div>
+                       No modo intrusivo existe a possibilidade de criar novas actividades condicionadas a perguntas básicas para definir que tipo de actividade. Após fazer essa escolha serão gerados temporizadores a contabilizar o tempo de cada acção definida no início de cada questão sobre a actividade, sendo despoletado uma notificação caso seja necessário o utilizador parar essa acção mesmo que seja temporáriamente.
+                       <a class="button botaoEntrar" href="#modo3" id="modo3Button" data-transition="fade" onclick="iniciaModo3();">Entrar</a>
+                   </div>
+               </li>
+ </ul>
+        </div>
+        </div>
+        
+        <div class="panel carta" title="" data-header="header_1"  data-footer="none" id="carta1"  style="overflow:hidden;">
+			<a class="linkCarta" style="display:block;height:100%; width:100%; background-size:cover;">
+            </a>
+		</div>
+        <div class="panel carta" title="" data-header="header_1" data-footer="none" data-nav="nav_0" id="carta2" escondida="escondida" style="overflow:hidden;">
+			<a class="linkCarta" style="display:block;height:100%; width:100%; background-size:cover;"></a>
+		</div>
+        <div class="panel" id="caption" title="" modal="true" style=""></div>
+        <div class="panel" title="Normal" data-footer="none" data-header="header_1" data-nav="nav_0" id="modo2">
+           
+                    <ul class="list">
+                        <li class="button" onclick='iniciaModo2(0);'>Lazer</li>
+                        <li class="button" onclick='iniciaModo2(1);'>Saúde</li>
+                        <li class="button" onclick='iniciaModo2(2);'>Trabalho</li>
+                        <li class="button" onclick='iniciaModo2(3);'>Desporto</li>
+                    </ul>
+        
+        </div>
+        <div class="panel" title="Actividade" data-footer="none" data-header="header_intrusivo" data-nav="nav_0" id="actividade"
+        style="">
+            <div id="timers">
+         <ul class="accordion" >
+			<li  class="active timer timerActividade has-sub">
+                    <a class="tempoActividade"></a>
+				<div class="divActividade">
+                
+                </div>
+                <li  class="timer timerEcra has-sub">
+                    <a class="tempoEcra"></a>
+				<div >
+                  Pisque mais os olhos<br>
+		          Mantenha o monitor em frente ao seu rosto<br>
+		          Fique a pelo menos 50cm de distância da tela<br>
+		          Use o monitor em um ambiente bem iluminado<br>
+		          Evite se alimentar diante do computador<br>
+                    <span class="botaoAccordion" onclick='alert("wahts");'>Parar temporizador</span>
+                </div>
+                    
+			</li>
+			  <li  class="timer timerSentado has-sub">
+                    <a class="tempoSentado"></a>
+				<div>
+                    Tente deixar os seus pés rectos ao sentar<br>
+                    Mantenha os cotovelos na mesma altura dos pulsos<br>
+                    <span class="botaoAccordion" onclick='alert("wahts");'>Parar temporizador</span>
+                </div>
+			</li>
+			  <li class="timer timerPe has-sub" >
+                    <a class="tempoPe"></a>
+				<div>
+            Cuidado com a sua postura<br>
+            Um homem não deve pegar mais de 40Kg (média)<br>
+            Considere bebidas desportivas com electrolitos<br>
+                    <span class="botaoAccordion" onclick='alert("wahts");'>Parar temporizador</span>
+                </div>
+			</li>
+			  <li class="timer timerComer has-sub" >
+                    <a class="tempoComer"></a>
+				<div>
+                Coma um snack se passa mais de 4h entre refeições<br>
+                    <span class="botaoAccordion" onclick='alert("wahts");'>Parar temporizador</span>
+                </div>
+			</li>
+		</ul>
+         </div>
+            
+        </div>
+        <div class="panel" title="Intrusivo"  data-footer="none" data-header="header_1" data-nav="nav_0" id="modo3"
+        style="">
+			<h2>Escolha uma actividade: </h2>
+            <!--
+  
+-->
+            <select name="select" id = "listaActividades" >
+              <option value = "desporto">Prática de Desporto</option>
+              <option value = "percurso">Percurso a pé</option>
+              <option value = "montanhismo">Montanhismo</option>
+              <option value = "estudar">Estudar</option>
+              <option value = "programar">Programar</option>
+              <option value = "secretaria">Trabalho de secretária</option>
+           </select>
+           <a class="button" style="width:100%" onclick="iniciaActividade();">
+                Iniciar Actividade
+            </a>
+            <a class="button" style="width:100%"  onclick="criarActividade();">
+                Criar uma nova Actividade
+            </a>
+		
+		
+        </div>
+        <div class="panel" title="Nova Actividade" data-header="header_novaActividade" data-footer="none" id="configActividade">
+        <h2>Passa muito tempo sentado?</h2>
+        <input type="checkbox" name="slider" id="sentado" class="toggle">
+        <label for="sentado" data-on="Sim" data-off="Não"> <span></span> </label>
+        <h2>Passa muito tempo a olhar para um ecrã?</h2>
+        <input type="checkbox" name="slider" id="ecra" class="toggle">
+        <label for="ecra" data-on="Sim" data-off="Não"> <span></span> </label>
+        <h2>Faz esforço físico?</h2>
+        <input type="checkbox" name="slider" id="fisico" class="toggle">
+        <label for="fisico" data-on="Sim" data-off="Não"> <span></span> </label>
+        <h2>Passa muito tempo sem comer?</h2>
+        <input type="checkbox" name="slider" id="comer" class="toggle">
+        <label for="comer" data-on="Sim" data-off="Não"> <span></span> </label>
+        <h2>Está de pé muito tempo no mesmo sítio?</h2>
+         <input type="checkbox" name="slider" id="pe" class="toggle">
+        <label for="pe" data-on="Sim" data-off="Não"> <span></span> </label>
+        <p >
+         <h2>Tipo de Actividade: </h2>            
+         <input type = "radio" style="margin-left:10%" name = "radtipo" id = "tipotrabalho" value = "radtrabalho" />
+         <label for = "tipotrabalho">Trabalho</label>
+         <input type = "radio" name = "radtipo" id = "tipolazer" value = "radlazer" />
+         <label for = "tipolazer">Lazer</label>
+       </p>
+            <a class="button" onclick="concluirConfigActividade();" style="margin-left:10%;width:80%; margin-top:20px;">Concluir</a>
+        </div>
+        <div class="panel" title="Definições" data-footer="none" data-header="header_opts" data-nav="nav_0" id="opcoes"
+        style="">
+            
+            <div  style="width:100%" id="controlos">
+                    <h2>Timer</h2>
+                    <input type="checkbox" class="toggle" id="toggleTimer" onclick="toggleTimer();">
+                    <label for="toggleTimer" data-off="Off" data-on="On"><span></span>
+                    </label>
+            </div>
+            <a class="button" onclick="reset();" style="width:100%"> Repor definições iniciais </a>
+            
+        </div>
+         <div class="panel" title="Tutorial" data-footer="none" data-nav="nav_0" id="tutorial"
+        style=""> 
+             <h1>Navegação de sugestões</h1>
+            <p> Para passar as imagens faça swipe. Swipe para a esquerda avança para a imagem seguinte, swipe para a direita volta para a imagem anterior. </p>
+            <p> Para visualizar e esconder a notificação, toque sobre a imagem.</p><br>
+             <h1>Modo sugestivo</h1>
+            <p> O modo sugestivo apresenta sugestões aleatórias </p><br>
+             <h1>Modo normal</h1>
+            <p> Neste modo poderá escolher uma actividade pré definida e serão apresentadas sugestões de acordo com essa actividade.</p>
+            <p> Poderá ligar ou desligar o timer nas definições.</p><br>
+             <h1>Modo intrusivo</h1>
+            <p> O modo intrusivo é o mais completo. Permite definir actividades novas e configura-las de acordo com um conjunto de perguntas pré definidas. </p><br>
+             
+        </div>
+    </div>
+        
+    <div id="navbar">
+        <a href="#main"  class="icon home">Home</a>
+    </div>
+    <header id="header_0" >
+        <h1 id="pageTitle" class="">Get Right</h1>
+    </header>
+    
+     <header id="header_1">
+         <a href="#main" class="button" id="voltar" onclick='stopTimer();toggleCaption("off");'>Voltar</a>
+         <a class="button icon settings" id="botaoOpts" href="#opcoes" onclick='stopTimer();toggleCaption("off");' style="float:right;">Opções</a>
+    </header>
+    <header id="header_normal">
+         <a href="#modo2" class="button" id="voltar" onclick='stopTimer();toggleCaption("off");'>Voltar</a>
+         <a class="button icon settings" id="botaoOpts" href="#opcoes" onclick='stopTimer();toggleCaption("off");' style="float:right;">Opções</a>
+    </header>
+    <header id="header_intrusivo">
+         <a href="#modo3" class="button" id="voltar" onclick='stopTimer();toggleCaption("off");escondeTimers();'>Voltar</a>
+         <a class="button icon settings" id="botaoOpts" href="#opcoes" onclick='stopTimer();toggleCaption("off");' style="float:right;">Opções</a>
+    </header>
+    <header id="header_novaActividade">
+         <a href="#modo3" class="button" id="voltar" onclick='stopTimer();toggleCaption("off");'>Voltar</a>
+         <a class="button icon settings" id="botaoOpts" href="#opcoes" onclick='stopTimer();toggleCaption("off");' style="float:right;">Opções</a>
+    </header>
+    <header id="header_opts">
+         <a href="#" class="button" id="backButton">Voltar</a>
+    </header>
+    <nav id="nav_0" >
+        <h1>Side Menu</h1>
+    </nav>
+    
+    <footer id="footer_1">
+        <a href="#tutorial" class="icon info" data-transition="up">Tutorial</a>
+        
+    </footer>
+</div>
+</html>
